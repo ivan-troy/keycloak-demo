@@ -15,6 +15,4 @@ USER jboss
 
 COPY themes* /opt/jboss/keycloak/themes/
 
-COPY config/demo-realm.json /opt/jboss/keycloak/themes/
-
 COPY config/demo-realm.json /opt/jboss/keycloak/
