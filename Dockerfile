@@ -13,6 +13,6 @@ USER jboss
 #RUN mvn package -f /opt/jboss/keycloak-demo/examples/preconfigured-demo/pom.xml && rm -rf ~/.m2/repository
 #RUN cd /opt/jboss/keycloak-demo/examples/preconfigured-demo && find -name *.war | grep -v ear | xargs -I {} cp {} /opt/jboss/keycloak-demo/keycloak/standalone/deployments/ 
 
-RUN cp -R themes/* /opt/jboss/keycloak/themes/
+COPY themes/adminlte /opt/jboss/keycloak/themes/
 
 COPY config/demo-realm.json /opt/jboss/keycloak/
