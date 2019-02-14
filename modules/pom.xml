@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <modelVersion>4.0.0</modelVersion>
+    <groupId>org.sonatype.mvnexbook</groupId>
+    <artifactId>keycloak-modules</artifactId>
+    <version>1.0</version>
+    <packaging>pom</packaging>
+    <name>Keycloak modules</name>
+    <url>http://it.com/modules</url>
+
+    <modules>
+        <module>keycloak-bcrypt-master</module>
+        <module>MyEventListener01</module>
+    </modules>
+
+      <build>
+        <finalName>mvnexbook-examples-${project.version}</finalName>
+        <plugins>
+          <plugin>
+            <artifactId>maven-assembly-plugin</artifactId>
+            <configuration>
+              <descriptorRefs>
+                <descriptorRef>project</descriptorRef>
+              </descriptorRefs>
+            </configuration>
+            <executions>
+              <execution>
+                <id>examples</id>
+                <phase>package</phase>
+                <goals>
+                  <goal>attached</goal>
+                </goals>
+              </execution>
+            </executions>
+          </plugin>
+        </plugins>
+      </build>
+
+</project>
