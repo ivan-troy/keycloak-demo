@@ -14,7 +14,7 @@ ENV MAVEN_HOME /usr/share/maven
 
 USER jboss
 
-ADD kc-custom /opt/jboss/
+RUN cd /opt/jboss/ & mkdir kc-custom
 COPY modules* /opt/jboss/kc-custom/
 RUN mvn package -f /opt/jboss/kc-custom/pom.xml && rm -rf ~/.m2/repository
 RUN cd /opt/jboss/kc-custom && find -name *.jar | xargs -I {} cp {} /opt/jboss/keycloak/standalone/deployments/ 
