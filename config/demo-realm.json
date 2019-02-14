@@ -1,35 +1,59 @@
 {
-    "realm": "basic-auth",
+    "id": "vylla-mp",
+    "realm": "vylla-mp",
+    "displayNameHtml": "<div class=kc-logo-text>Vylla Marketplace<span></span></div>",
     "enabled": true,
+
     "accessTokenLifespan": 60,
     "accessCodeLifespan": 60,
     "accessCodeLifespanUserAction": 300,
+
     "ssoSessionIdleTimeout": 600,
     "ssoSessionMaxLifespan": 36000,
+
     "sslRequired": "external",
-    "registrationAllowed": false,
+
+    "registrationAllowed": true,
+    "registrationEmailAsUsername": false,
+    "rememberMe": false,
+    "verifyEmail": false,
+    "loginWithEmailAllowed": true,
+    "duplicateEmailsAllowed": false,
+    "resetPasswordAllowed": true,
+    "editUsernameAllowed": false,
+
     "privateKey": "MIICXAIBAAKBgQCrVrCuTtArbgaZzL1hvh0xtL5mc7o0NqPVnYXkLvgcwiC3BjLGw1tGEGoJaXDuSaRllobm53JBhjx33UNv+5z/UMG4kytBWxheNVKnL6GgqlNabMaFfPLPCF8kAgKnsi79NMo+n6KnSY8YeUmec/p2vjO2NjsSAVcWEQMVhJ31LwIDAQABAoGAfmO8gVhyBxdqlxmIuglbz8bcjQbhXJLR2EoS8ngTXmN1bo2L90M0mUKSdc7qF10LgETBzqL8jYlQIbt+e6TH8fcEpKCjUlyq0Mf/vVbfZSNaVycY13nTzo27iPyWQHK5NLuJzn1xvxxrUeXI6A2WFpGEBLbHjwpx5WQG9A+2scECQQDvdn9NE75HPTVPxBqsEd2z10TKkl9CZxu10Qby3iQQmWLEJ9LNmy3acvKrE3gMiYNWb6xHPKiIqOR1as7L24aTAkEAtyvQOlCvr5kAjVqrEKXalj0Tzewjweuxc0pskvArTI2Oo070h65GpoIKLc9jf+UA69cRtquwP93aZKtW06U8dQJAF2Y44ks/mK5+eyDqik3koCI08qaC8HYq2wVl7G2QkJ6sbAaILtcvD92ToOvyGyeE0flvmDZxMYlvaZnaQ0lcSQJBAKZU6umJi3/xeEbkJqMfeLclD27XGEFoPeNrmdx0q10Azp4NfJAY+Z8KRyQCR2BEG+oNitBOZ+YXF9KCpH3cdmECQHEigJhYg+ykOvr1aiZUMFT72HU0jnmQe2FVekuG+LJUt2Tm7GtMjTFoGpf0JwrVuZN39fOYAlo+nTixgeW7X8Y=",
     "publicKey": "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCrVrCuTtArbgaZzL1hvh0xtL5mc7o0NqPVnYXkLvgcwiC3BjLGw1tGEGoJaXDuSaRllobm53JBhjx33UNv+5z/UMG4kytBWxheNVKnL6GgqlNabMaFfPLPCF8kAgKnsi79NMo+n6KnSY8YeUmec/p2vjO2NjsSAVcWEQMVhJ31LwIDAQAB",
-    "requiredCredentials": [ "password" ],
-    "users" : [
+
+    "requiredCredentials": [
+        "password"
+    ],
+    "users": [
         {
-            "username" : "admin",
+            "username": "admin",
             "enabled": true,
-            "email" : "admin@admin.com",
+            "email": "admin@admin.com",
             "firstName": "Admin",
-            "lastName": "Burke",
-            "credentials" : [
-                { "type" : "password",
-                    "value" : "password" }
+            "lastName": "Admin",
+            "credentials": [
+                {
+                    "type": "password",
+                    "value": "password"
+                }
             ],
-            "realmRoles": [ "user","admin" ],
+            "realmRoles": [
+                "user",
+                "admin"
+            ],
             "clientRoles": {
-                "realm-management": [ "realm-admin" ]
+                "realm-management": [
+                    "realm-admin"
+                ]
             }
         }
     ],
-    "roles" : {
-        "realm" : [
+    "roles": {
+        "realm": [
             {
                 "name": "user",
                 "description": "User privileges"
@@ -40,16 +64,126 @@
             }
         ]
     },
+
     "clients": [
         {
-            "clientId": "basic-auth-service",
-            "standardFlowEnabled": false,
-            "directAccessGrantsEnabled": true,
+            "clientId": "fe-marketplace",
             "enabled": true,
-            "adminUrl": "/basicauth",
-            "baseUrl": "/basicauth",
-            "secret": "password"
+            "directAccessGrantsEnabled": true,
+            "secret": "secret",
+            "adminUrl": "/",
+            "baseUrl": "/",
+            "rootUrl": "http://localhost:9090",
+            "redirectUris": [
+                "http://localhost:9090/*"
+            ],
+            "webOrigins": [
+                "http://localhost:9090"
+            ],
+            "publicClient": true
+        },
+        {
+            "clientId": "be-marketplace",
+            "enabled": true,
+            "bearerOnly": true,
+            "clientAuthenticatorType": "client-secret",
+            "secret": "secret",
+            "redirectUris": [],
+            "webOrigins": [],
+            "publicClient": true
         }
-    ]
+    ],
+
+    "smtpServer": {
+        "replyToDisplayName": "NoReply",
+        "starttls": "true",
+        "auth": "true",
+        "envelopeFrom": "",
+        "ssl": "",
+        "password": "password",
+        "port": "587",
+        "host": "smtp.gmail.com",
+        "replyTo": "no_reply@vylla.com",
+        "from": "vylla.master@gmail.com",
+        "fromDisplayName": "Vylla Marketplace",
+        "user": "vylla.master@gmail.com"
+    },
+
+    "loginTheme": "base",
+    "emailTheme": "base",
+    "accountTheme": "base",
+    "adminTheme": "base",
+
+    "eventsEnabled": true,
+    "eventsListeners": [
+        "jboss-logging"
+    ],
+    "enabledEventTypes": [
+        "SEND_RESET_PASSWORD",
+        "REMOVE_TOTP",
+        "REVOKE_GRANT",
+        "UPDATE_TOTP",
+        "LOGIN_ERROR",
+        "CLIENT_LOGIN",
+        "RESET_PASSWORD_ERROR",
+        "IMPERSONATE_ERROR",
+        "CODE_TO_TOKEN_ERROR",
+        "CUSTOM_REQUIRED_ACTION",
+        "RESTART_AUTHENTICATION",
+        "IMPERSONATE",
+        "UPDATE_PROFILE_ERROR",
+        "LOGIN",
+        "UPDATE_PASSWORD_ERROR",
+        "CLIENT_INITIATED_ACCOUNT_LINKING",
+        "TOKEN_EXCHANGE",
+        "LOGOUT",
+        "REGISTER",
+        "CLIENT_REGISTER",
+        "IDENTITY_PROVIDER_LINK_ACCOUNT",
+        "UPDATE_PASSWORD",
+        "CLIENT_DELETE",
+        "FEDERATED_IDENTITY_LINK_ERROR",
+        "IDENTITY_PROVIDER_FIRST_LOGIN",
+        "CLIENT_DELETE_ERROR",
+        "VERIFY_EMAIL",
+        "CLIENT_LOGIN_ERROR",
+        "RESTART_AUTHENTICATION_ERROR",
+        "EXECUTE_ACTIONS",
+        "REMOVE_FEDERATED_IDENTITY_ERROR",
+        "TOKEN_EXCHANGE_ERROR",
+        "PERMISSION_TOKEN",
+        "SEND_IDENTITY_PROVIDER_LINK_ERROR",
+        "EXECUTE_ACTION_TOKEN_ERROR",
+        "SEND_VERIFY_EMAIL",
+        "EXECUTE_ACTIONS_ERROR",
+        "REMOVE_FEDERATED_IDENTITY",
+        "IDENTITY_PROVIDER_POST_LOGIN",
+        "IDENTITY_PROVIDER_LINK_ACCOUNT_ERROR",
+        "UPDATE_EMAIL",
+        "REGISTER_ERROR",
+        "REVOKE_GRANT_ERROR",
+        "EXECUTE_ACTION_TOKEN",
+        "LOGOUT_ERROR",
+        "UPDATE_EMAIL_ERROR",
+        "CLIENT_UPDATE_ERROR",
+        "UPDATE_PROFILE",
+        "CLIENT_REGISTER_ERROR",
+        "FEDERATED_IDENTITY_LINK",
+        "SEND_IDENTITY_PROVIDER_LINK",
+        "SEND_VERIFY_EMAIL_ERROR",
+        "RESET_PASSWORD",
+        "CLIENT_INITIATED_ACCOUNT_LINKING_ERROR",
+        "REMOVE_TOTP_ERROR",
+        "VERIFY_EMAIL_ERROR",
+        "SEND_RESET_PASSWORD_ERROR",
+        "CLIENT_UPDATE",
+        "CUSTOM_REQUIRED_ACTION_ERROR",
+        "IDENTITY_PROVIDER_POST_LOGIN_ERROR",
+        "UPDATE_TOTP_ERROR",
+        "CODE_TO_TOKEN",
+        "IDENTITY_PROVIDER_FIRST_LOGIN_ERROR"
+    ],
+    "adminEventsEnabled": true,
+    "adminEventsDetailsEnabled": false
 
 }
