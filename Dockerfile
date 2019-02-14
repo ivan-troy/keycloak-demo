@@ -9,9 +9,12 @@ RUN curl -fsSL https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/bina
 ENV MAVEN_HOME /usr/share/maven
 
 USER jboss
+ADD kc-custom /opt/jboss/
+
 #RUN cd /opt/jboss && curl -s http://downloads.jboss.org/keycloak/$KEYCLOAK_VERSION/keycloak-demo-$KEYCLOAK_VERSION.zip -o tmp.zip && unzip tmp.zip -d . && mv /opt/jboss/keycloak-demo-$KEYCLOAK_VERSION /opt/jboss/keycloak-demo
-#RUN mvn package -f /opt/jboss/keycloak-demo/examples/preconfigured-demo/pom.xml && rm -rf ~/.m2/repository
-#RUN cd /opt/jboss/keycloak-demo/examples/preconfigured-demo && find -name *.war | grep -v ear | xargs -I {} cp {} /opt/jboss/keycloak-demo/keycloak/standalone/deployments/ 
+
+#RUN mvn package -f /opt/jboss/kc-custom/pom.xml && rm -rf ~/.m2/repository
+#RUN cd /opt/jboss/kc-custom && find -name *.jar | xargs -I {} cp {} /opt/jboss/keycloak/standalone/deployments/ 
 
 COPY themes* /opt/jboss/keycloak/themes/
 
