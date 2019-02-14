@@ -11,14 +11,13 @@ RUN curl -fsSL https://archive.apache.org/dist/maven/maven-3/$MAVEN_VERSION/bina
   && ln -s /usr/share/maven/bin/mvn /usr/bin/mvn
 ENV MAVEN_HOME /usr/share/maven
 
-
-USER jboss
-
 RUN cd /opt/jboss/ & mkdir kc-custom
 COPY modules* /opt/jboss/kc-custom/
 RUN mvn package -f /opt/jboss/kc-custom/pom.xml && rm -rf ~/.m2/repository
+
+
+USER jboss
+
 RUN cd /opt/jboss/kc-custom && find -name *.jar | xargs -I {} cp {} /opt/jboss/keycloak/standalone/deployments/ 
-
 COPY themes* /opt/jboss/keycloak/themes/
-
 COPY config/demo-realm.json /opt/jboss/keycloak/
